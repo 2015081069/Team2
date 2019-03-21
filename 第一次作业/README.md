@@ -111,5 +111,10 @@ paste("方差均值比为:",VMR)
 ### 结果图如下:
 ![计算的结果图如下:](https://github.com/cuit201608/Team2/blob/master/第一次作业/结果图3.png)
 
-## 结论
-![根据]
+## 四、结论
+![根据样方分析结论可知:](https://github.com/cuit201608/Team2/blob/master/第一次作业/结论.png)
+### 根据计算结果可知：方差均值比（VMR）为: 0.805194805194805靠近1
+### 所以4月11日当天学生的座位情况属于：随机分布
+
+## 五、样方分析的缺点
+![样方分析的缺点如下:](https://github.com/cuit201608/Team2/blob/master/第一次作业/缺点.png)
