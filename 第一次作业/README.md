@@ -39,3 +39,77 @@ for (i in 1 : 96) {
   }
 }
 ```
+### 效果图如下:
+![教室座位如下图所示：](https://github.com/cuit201608/Team2/blob/master/第一次作业/结果图1.png)
+
+### 2、标记4月11日当天所有学生所坐位置
+``` R
+newdata<-read.csv(file = "D:/大三下/空间数据库/课件(新)/seat.csv",header = T,sep=",")
+number<-"X4月11日" #所查对象的列名
+#填涂查找的同学所坐的座位
+for(i in 1 : nrow(newdata))
+{
+  if(is.na(newdata[i,number])==FALSE) #判断位置上值是否为缺省值（R语言中，NA代表位置上的值为空，NULL代表连位置都没有，变量为空。）
+  {
+    seekViewport(as.character(newdata[i,number]))#查找对应的Viewport对象
+    grid.rect(gp=gpar(col="gray29",fill="green"))#col表示边框及字体颜色，fill表示填充颜色
+    grid.text(newdata[i,number])
+  }
+}
+```
+### 效果图如下:
+![教室标记座位如下所示：](https://github.com/cuit201608/Team2/blob/master/第一次作业/结果图2.png)
+
+## 二、选取样方（这里选择的是8个3*4的样方）
+``` R
+l1<-c(1,2,3,4,17,18,19,20,33,34,35,36)
+l2<-c(5,6,7,8,21,22,23,24,37,38,39,40)
+l3<-c(9,10,11,12,25,26,27,28,41,42,43,44)
+l4<-c(13,14,15,16,29,30,31,32,45,46,47,48)
+l5<-c(49,50,51,52,65,66,67,68,81,82,83,84)
+l6<-c(53,54,55,56,69,70,71,72,85,86,87,88)
+l7<-c(57,58,59,60,73,74,75,76,89,90,91,92)
+l8<-c(61,62,63,64,77,78,79,80,93,94,95,96)
+yflist<-list(l1,l2,l3,l4,l5,l6,l7,l8)
+```
+
+## 三、计算
+### 1、计算平均值
+``` R
+times1<-0 #记录存在的座位数
+for(i in 1 : nrow(newdata))
+{
+  if(is.na(newdata[i,number])==FALSE) #判断位置上值是否为缺省值（R语言中，NA代表位置上的值为缺省值，NULL代表连位置都没有，变量为空。）
+  {
+    times1<-times1+1
+  }
+}
+Mean1<-times1/8 #平均值
+paste("平均值为:",Mean1)
+```
+### 2、计算方差和方差均值比
+``` R
+Vartotal<-0 #方差子数的和
+times2<-0 #记录每个样方中的点数
+for (i in 1:8) 
+{
+  for(j in 1 : nrow(newdata))
+  {
+    if(is.na(newdata[j,number])==FALSE&newdata[j,number]%in%yflist[[i]]) #判断该座位是否在样方中，注意list[[i]]才表示嵌套list里面的第几个元素
+    {
+      times2<-times2+1
+    }
+  }
+  Vartotal<-Vartotal+(times2-Mean1)^2
+  times2<-0
+}
+Var1<-Vartotal/(8-1)
+paste("方差为:",Var1)
+VMR<-Var1/Mean1
+paste("方差均值比为:",VMR)
+```
+### 结果图如下:
+![计算的结果图如下:](https://github.com/cuit201608/Team2/blob/master/第一次作业/结果图3.png)
+
+## 结论
+![根据]
