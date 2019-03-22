@@ -109,3 +109,5 @@ moran.test(ddd$V3, nb2listw(snbk1))
 ![定义二如下：](https://github.com/cuit201608/Team2/blob/master/第二次作业/说明2.png)
 ### 实验结果如下：
 ![莫兰指数计算结果如下：](https://github.com/cuit201608/Team2/blob/master/第二次作业/结果图3.png)
+
+## 根据分析结果可知：得出的莫兰指数小于0，但是也比较靠近0，所以同学们所坐的座位分布与他们的成绩不相关
