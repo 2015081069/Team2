@@ -17,6 +17,7 @@ upViewport() #回到上一个viewport（即回到的父节点）,不然后一个
 xvec <- 0.15
 yvec <- 0.6
 newdata<-data.frame() #创建newdata存取grid的x，y坐标和对应当天所坐学生的gpa
+ddd<-data.frame()
 for (i in 1 : 96) {
   if(i!=17&i!=33&i!=49&i!=65&i!=81){
     newdata[i,1]=xvec #存x坐标
@@ -57,15 +58,23 @@ for(i in 1 : nrow(newdata1))
     grid.text(newdata1[i,number])
   }
 }
-#将位置空缺的同学的gpa记为0
+m<-0
+#提取有位置的座位
 for (i in 1:nrow(newdata)) 
 {
-  if(is.na(newdata[i,3])==TRUE)
-    newdata[i,3]=0  
+  if(is.na(newdata[i,3])==FALSE)
+  {
+    m<-m+1
+    ddd[m,1]=newdata[i,1]
+    ddd[m,2]=newdata[i,2]
+    ddd[m,3]=newdata[i,3]
+  }
+    
 }
-newdata2<-data.frame(newdata$V1,newdata$V2) #创建newdata2存放座位的x，y坐标
-spoint<-data.frame(cbind(newdata2$newdata.V1,newdata2$newdata.V2))
+newdata2<-data.frame(ddd$V1,ddd$V2) #创建newdata2存放座位的x，y坐标
+spoint<-data.frame(cbind(newdata2$ddd.V1,newdata2$ddd.V2))
 sptest <- SpatialPoints(spoint, proj4string = CRS("+proj=longlat +datum=WGS84"))
-nbk1 <- knn2nb(knearneigh(sptest, k = 2, longlat = TRUE))
+nbk1 <- knn2nb(knearneigh(sptest, k = 5, longlat = TRUE))
 snbk1 <- make.sym.nb(nbk1)
-moran.test(newdata$V3, nb2listw(snbk1))
+plot(nb2listw(snbk1), cbind(spoint$X1 , spoint$X2))
+moran.test(ddd$V3, nb2listw(snbk1))
