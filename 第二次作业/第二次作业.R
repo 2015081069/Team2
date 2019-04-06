@@ -69,7 +69,6 @@ for (i in 1:nrow(newdata))
     ddd[m,2]=newdata[i,2]
     ddd[m,3]=newdata[i,3]
   }
-    
 }
 newdata2<-data.frame(ddd$V1,ddd$V2) #创建newdata2存放座位的x，y坐标
 spoint<-data.frame(cbind(newdata2$ddd.V1,newdata2$ddd.V2))
